@@ -5,3 +5,4 @@ bullet/2.87@bincrafters/stable
 cmake
 
 [options]
+bullet:shared=True
