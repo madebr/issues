@@ -18,6 +18,7 @@ configuration = 'Release'
 
 def desc():
     print((srcdir / 'description.txt').open().read())
+    sys.stdout.flush()
 
 
 def init():
