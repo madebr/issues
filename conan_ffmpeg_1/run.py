@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-from shutil import which
+from shutil import which, rmtree
 from subprocess import run, PIPE
 import os
 import sys
 
 srcdir = Path(__file__).absolute().parent
 bindir = srcdir / 'build'
-bindir.mkdir(exist_ok=True)
+if bindir.is_dir():
+    rmtree(bindir)
+bindir.mkdir()
 
 cmake_generator = os.environ.get('CMAKE_GENERATOR', 'Unix Makefiles')
 configuration = 'Release'
 
 
 def desc():
-    print('Description:')
     print((srcdir / 'description.txt').open().read())
 
 

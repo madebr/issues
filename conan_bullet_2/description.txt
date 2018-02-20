@@ -1,0 +1,9 @@
+Problem:
+Static bullet library test...
+
+What this does:
+- Link to static conan-bullet
+- Try to set global gContactProcessedCallback callback
+
+status:
+...
