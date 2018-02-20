@@ -1,0 +1,7 @@
+[requires]
+bullet/2.87@bincrafters/stable
+
+[generators]
+cmake
+
+[options]
