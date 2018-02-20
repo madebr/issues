@@ -1,0 +1,2 @@
+- Link to dynamic conan-bullet
+- Try to set global gContactProcessedCallback callback

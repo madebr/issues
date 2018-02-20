@@ -14,6 +14,11 @@ cmake_generator = os.environ.get('CMAKE_GENERATOR', 'Unix Makefiles')
 configuration = 'Release'
 
 
+def desc():
+    print('Description:')
+    print((srcdir / 'description.txt').open().read())
+
+
 def init():
     conan_exec = which('conan')
 
@@ -46,7 +51,10 @@ def test():
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
-        sys.argv += ['init', 'build', 'test']
+        sys.argv += ['desc', 'init', 'build', 'test']
+
+    if 'desc' in sys.argv:
+        desc()
 
     if 'init' in sys.argv:
         init()
