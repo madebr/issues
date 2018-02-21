@@ -6,6 +6,7 @@ environment:
   - DIR: "C:\\issues\\conan_bullet_1"
   - DIR: "C:\\issues\\conan_bullet_2"
   - DIR: "C:\\issues\\conan_ffmpeg_1"
+  - DIR: "C:\\issues\\conan_boost_1"
 
 matrix:
   fast_finish: false
