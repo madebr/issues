@@ -12,7 +12,10 @@ bindir = srcdir / 'build'
 
 cmake_generator = os.environ.get('CMAKE_GENERATOR', 'Unix Makefiles')
 configuration = os.environ.get('CONFIGURATION', 'Release')
-static_runtime = False
+
+if platform.system() == 'Windows':
+    static_runtime = False
+    std_runtime = '{}{}'.format('MT' if static_runtime else 'MD', 'd' if configuration != 'Release' else '')
 
 
 def run(*args, **kwargs):
@@ -54,12 +57,12 @@ def build():
     conan_install = ['conan', 'install', str(srcdir), '-s', 'build_type={}'.format(configuration), '--build=missing']
     if platform.system() == 'Windows':
         conan_install += ['-s', 'arch={}'.format('x86_64' if 'Win64' in cmake_generator else 'x86')]
-        conan_install += ['-s', 'compiler.runtime={}'.format('MT' if configuration == 'Release' else 'MTd')]
+        conan_install += ['-s', 'compiler.runtime={}'.format(std_runtime)]
     run(conan_install, cwd=bindir, check=True)
 
     env = dict(os.environ)
     if platform.system() == 'Windows':
-        cflags = '{}{}'.format('/MT' if static_runtime else '/MD', 'd' if configuration != 'Release' else '')
+        cflags = '/{}'.format(std_runtime)
         env['CFLAGS'] = cflags
         env['CXXFLAGS'] = cflags
     run(['cmake', str(srcdir), '-DCMAKE_BUILD_TYPE={}'.format(configuration), '-G{}'.format(cmake_generator)], cwd=bindir, check=True, env=env)
