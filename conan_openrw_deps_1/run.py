@@ -12,6 +12,7 @@ bindir = srcdir / 'build'
 
 cmake_generator = os.environ.get('CMAKE_GENERATOR', 'Unix Makefiles')
 configuration = os.environ.get('CONFIGURATION', 'Release')
+static_runtime = False
 
 
 def run(*args, **kwargs):
@@ -58,8 +59,9 @@ def build():
 
     env = dict(os.environ)
     if platform.system() == 'Windows':
-        env['CFLAGS'] = '/MT' if configuration == 'Release' else '/MTd'
-        env['CXXFLAGS'] = '/MT' if configuration == 'Release' else '/MTd'
+        cflags = '{}{}'.format('/MT' if static_runtime else '/MD', 'd' if configuration != 'Release' else '')
+        env['CFLAGS'] = cflags
+        env['CXXFLAGS'] = cflags
     run(['cmake', str(srcdir), '-DCMAKE_BUILD_TYPE={}'.format(configuration), '-G{}'.format(cmake_generator)], cwd=bindir, check=True, env=env)
     run(['cmake', '--build', str(bindir), '--config', configuration], cwd=bindir, check=True)
 
