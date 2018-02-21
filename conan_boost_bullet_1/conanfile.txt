@@ -10,4 +10,4 @@ boost_property_tree/1.66.0@bincrafters/stable
 cmake
 
 [options]
-bullet:shared=True
+bullet:shared=False
