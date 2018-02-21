@@ -8,9 +8,6 @@ import sys
 
 srcdir = Path(__file__).absolute().parent
 bindir = srcdir / 'build'
-if bindir.is_dir():
-    rmtree(bindir)
-bindir.mkdir()
 
 cmake_generator = os.environ.get('CMAKE_GENERATOR', 'Unix Makefiles')
 configuration = 'Release'
@@ -22,6 +19,10 @@ def desc():
 
 
 def init():
+    if bindir.is_dir():
+        rmtree(bindir)
+    bindir.mkdir()
+
     conan_exec = which('conan')
 
     if not conan_exec:

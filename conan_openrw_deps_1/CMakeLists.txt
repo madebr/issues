@@ -15,6 +15,7 @@ add_executable(issue
     sdl2.cpp
     main.cpp
     )
+
 target_link_libraries(issue
     PUBLIC
         CONAN_PKG::boost_algorithm

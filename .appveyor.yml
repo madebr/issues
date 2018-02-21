@@ -1,6 +1,10 @@
 cache:
   - C:\.conan -> .cache
 
+configuration:
+#  - Debug
+  - Release
+
 environment:
   APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
   PYTHON: "C:\\Python36-x64"
