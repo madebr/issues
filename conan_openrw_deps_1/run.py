@@ -58,8 +58,8 @@ def build():
 
     env = dict(os.environ)
     if platform.system() == 'Windows':
-        env['CC'] = '/MT' if configuration == 'Release' else '/MTd'
-        env['CXX'] = '/MT' if configuration == 'Release' else '/MTd'
+        env['CFLAGS'] = '/MT' if configuration == 'Release' else '/MTd'
+        env['CXXFLAGS'] = '/MT' if configuration == 'Release' else '/MTd'
     run(['cmake', str(srcdir), '-DCMAKE_BUILD_TYPE={}'.format(configuration), '-G{}'.format(cmake_generator)], cwd=bindir, check=True, env=env)
     run(['cmake', '--build', str(bindir), '--config', configuration], cwd=bindir, check=True)
 
