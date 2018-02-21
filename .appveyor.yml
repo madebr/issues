@@ -7,6 +7,7 @@ configuration:
 
 environment:
   APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  APPVEYOR_SAVE_CACHE_ON_ERROR: true
   PYTHON: "C:\\Python36-x64"
   CMAKE_GENERATOR: Visual Studio 15 2017 Win64
   matrix:
