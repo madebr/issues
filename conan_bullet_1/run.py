@@ -44,7 +44,7 @@ def init():
 def build():
     run(['conan', 'install', str(srcdir)], cwd=bindir, check=True)
     run(['cmake', str(srcdir), '-DCMAKE_BUILD_TYPE={}'.format(configuration), '-G{}'.format(cmake_generator)], cwd=bindir, check=True)
-    run(['cmake', '--build', str(bindir)], cwd=bindir, check=True)
+    run(['cmake', '--build', str(bindir), '--config', configuration], cwd=bindir, check=True)
 
 
 def test():
