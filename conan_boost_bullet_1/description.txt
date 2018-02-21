@@ -1,9 +1,0 @@
-Problem:
-Testing out combination of default conan boost and bullet libraries.
-
-What this does:
-- Use some features of boost.
-- Tries to set something in bullet
-
-Status:
-??
