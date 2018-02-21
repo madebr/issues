@@ -50,7 +50,7 @@ def init():
 
 
 def build():
-    conan_install = ['conan', 'install', str(srcdir), '-s', 'build_type={}'.format(configuration)]
+    conan_install = ['conan', 'install', str(srcdir), '-s', 'build_type={}'.format(configuration), '--build=missing']
     if platform.system() == 'Windows':
         conan_install += ['-s', 'arch={}'.format('x86_64' if 'Win64' in cmake_generator else 'x86')]
         conan_install += ['-s', 'compiler.runtime={}'.format('MT' if configuration == 'Release' else 'MTd')]

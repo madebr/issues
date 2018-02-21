@@ -2,15 +2,22 @@
 
 from pathlib import Path
 from shutil import which, rmtree
-from subprocess import run, PIPE
 import os
+import platform
+import subprocess
 import sys
 
 srcdir = Path(__file__).absolute().parent
 bindir = srcdir / 'build'
 
 cmake_generator = os.environ.get('CMAKE_GENERATOR', 'Unix Makefiles')
-configuration = 'Release'
+configuration = os.environ.get('CONFIGURATION', 'Release')
+
+
+def run(*args, **kwargs):
+    print('exec: {}'.format(' '.join(['"{}"'.format(arg) for arg in args[0]])))
+    sys.stdout.flush()
+    return subprocess.run(*args, **kwargs)
 
 
 def desc():
@@ -37,13 +44,17 @@ def init():
         print('Cannot find conan after installation!', file=sys.stderr)
     run(['conan', 'user'], check=True)
 
-    remotes = run(['conan', 'remote', 'list'], stdout=PIPE, check=True)
+    remotes = run(['conan', 'remote', 'list'], stdout=subprocess.PIPE, check=True)
     if b'bincrafters' not in remotes.stdout:
         run(['conan', 'remote', 'add', 'bincrafters', 'https://api.bintray.com/conan/bincrafters/public-conan'], check=True)
 
 
 def build():
-    run(['conan', 'install', str(srcdir), '-s', 'build_type={}'.format(configuration)], cwd=bindir, check=True)
+    conan_install = ['conan', 'install', str(srcdir), '-s', 'build_type={}'.format(configuration), '--build=missing']
+    if platform.system() == 'Windows':
+        conan_install += ['-s', 'arch={}'.format('x86_64' if 'Win64' in cmake_generator else 'x86')]
+        conan_install += ['-s', 'compiler.runtime={}'.format('MT' if configuration == 'Release' else 'MTd')]
+    run(conan_install, cwd=bindir, check=True)
     run(['cmake', str(srcdir), '-DCMAKE_BUILD_TYPE={}'.format(configuration), '-G{}'.format(cmake_generator)], cwd=bindir, check=True)
     run(['cmake', '--build', str(bindir), '--config', configuration], cwd=bindir, check=True)
 
