@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2.2)
 
-set(NAME conan_ffmpeg_issue_1)
+set(NAME conan_boost)
 
 project("${NAME}")
 
@@ -10,7 +10,11 @@ conan_basic_setup(TARGETS)
 add_executable(issue main.cpp)
 target_link_libraries(issue
     PUBLIC
-        CONAN_PKG::ffmpeg
+        CONAN_PKG::boost_algorithm
+        CONAN_PKG::boost_config
+        CONAN_PKG::boost_filesystem
+        CONAN_PKG::boost_program_options
+        CONAN_PKG::boost_property_tree
     )
 
 enable_testing()
