@@ -1,9 +1,0 @@
-[requires]
-bullet/2.87@bincrafters/stable
-ffmpeg/3.4@bincrafters/stable
-
-[generators]
-cmake
-
-[options]
-bullet:shared=False

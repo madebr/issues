@@ -1,9 +1,0 @@
-Problem:
-Testing out combination of default ffmpeg and static bullet libraries.
-
-What this does:
-- Use some features of ffmpeg.
-- Tries to set something in bullet
-
-Status:
-??

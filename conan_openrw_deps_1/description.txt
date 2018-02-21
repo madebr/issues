@@ -1,0 +1,8 @@
+Problem:
+Link all dependencies of openrw together
+
+What this does:
+- use all deps of openrw
+
+Status:
+??

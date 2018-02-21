@@ -8,9 +8,6 @@ extern "C" {
 #include <cstdio>
 #include <vector>
 
-#include <BulletCollision/NarrowPhaseCollision/btManifoldPoint.h>
-#include <BulletCollision/NarrowPhaseCollision/btPersistentManifold.h>
-
 void loadFromFile(const std::string &filename) {
     AVFrame* frame = av_frame_alloc();
     if (!frame) {
@@ -102,18 +99,10 @@ void loadFromFile(const std::string &filename) {
     avformat_close_input(&formatContext);
 }
 
-bool contactProcessedCallback(btManifoldPoint &, void *, void *) {
-    return false;
-}
-
-int main(int argc, char **argv) {
+int do_ffmpeg(int argc, char **argv) {
     av_register_all();
 
     for(auto i = 1; i < argc; ++i)
         loadFromFile(argv[i]);
-
-    gContactProcessedCallback = contactProcessedCallback;
-
-    puts("success!\n");
     return 0;
 }
