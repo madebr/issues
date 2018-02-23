@@ -1,5 +1,6 @@
 cache:
   - C:\Users\appveyor\.conan -> .cache
+  - C:\.conan -> .cache
 
 configuration:
 #  - Debug
