@@ -1,5 +1,7 @@
 language: cpp
 
+os: linux
+
 matrix:
   include:
   - DIR="conan_boost_algorithm_1"
