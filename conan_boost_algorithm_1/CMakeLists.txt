@@ -7,7 +7,7 @@ project("${NAME}")
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-find_package(Boost COMPONENTS REQUIRED)
+find_package(Boost REQUIRED)
 
 add_executable(issue main.cpp)
 target_include_directories(issue
