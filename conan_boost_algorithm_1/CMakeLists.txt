@@ -15,6 +15,8 @@ target_include_directories(issue
         ${Boost_INCLUDE_DIRS}
     )
 
+message("Boost_INCLUDE_DIRS=${Boost_INCLUDE_DIRS}")
+
 enable_testing()
 
 add_test(
