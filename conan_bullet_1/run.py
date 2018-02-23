@@ -37,7 +37,7 @@ def init():
     conan_exec = which('conan')
 
     if not conan_exec:
-        pip_install = ['pip', 'install']
+        pip_install = ['pip3', 'install']
         if sys.platform != 'win32':
             pip_install  += ['--user']
         pip_install += ['conan']
