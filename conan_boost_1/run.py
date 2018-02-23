@@ -43,7 +43,7 @@ def subprocess_run(*popenargs, input=None, timeout=None, check=False, **kwargs):
 def run(*args, **kwargs):
     print('exec: {}'.format(' '.join(['"{}"'.format(arg) for arg in args[0]])))
     sys.stdout.flush()
-    return subprocess.run(*args, **kwargs)
+    return subprocess_run(*args, **kwargs)
 
 
 def desc():
