@@ -18,32 +18,11 @@ if platform.system() == 'Windows':
     static_runtime = False
     std_runtime = '{}{}'.format('MT' if static_runtime else 'MD', 'd' if configuration != 'Release' else '')
 
-CompletedProcess = namedtuple('CompletedProcess', ('args', 'retcode', 'stdout', 'stderr'))
-
-def subprocess_run(*popenargs, input=None, timeout=None, check=False, **kwargs):
-    if input is not None:
-        if 'stdin' in kwargs:
-            raise ValueError('stdin and input arguments may not both be used.')
-        kwargs['stdin'] = subprocess.PIPE
-
-    with subprocess.Popen(*popenargs, **kwargs) as process:
-        try:
-            stdout, stderr = process.communicate(input, timeout=timeout)
-        except:
-            process.kill()
-            process.wait()
-            raise
-        retcode = process.poll()
-        if check and retcode:
-            raise Exception(retcode, process.args, stdout, stderr)
-
-    return CompletedProcess(process.args, retcode, stdout, stderr)
-
 
 def run(*args, **kwargs):
     print('exec: {}'.format(' '.join(['"{}"'.format(arg) for arg in args[0]])))
     sys.stdout.flush()
-    return subprocess_run(*args, **kwargs)
+    return subprocess.run(*args, **kwargs)
 
 
 def desc():
