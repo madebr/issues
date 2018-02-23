@@ -1,10 +1,8 @@
 language: cpp
 
-os: linux
-
 matrix:
   include:
-  - DIR="C:\\issues\\conan_boost_algorithm_1"
+  - DIR="conan_boost_algorithm_1"
 
 script:
-  - "$DIR/run.py"
+- "$TRAVIS_BUILD_DIR/$DIR/run.py"
