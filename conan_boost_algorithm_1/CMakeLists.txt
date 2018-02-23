@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2.2)
 
-set(NAME conan_bullet_issue_1)
+set(NAME conan_boost_algorithm_1)
 
 project("${NAME}")
 
