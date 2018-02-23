@@ -7,4 +7,5 @@ matrix:
   - env: DIR="conan_boost_algorithm_1"
 
 script:
-- "$TRAVIS_BUILD_DIR/$DIR/run.py"
+  - pyenv shell 3.6
+  - "$TRAVIS_BUILD_DIR/$DIR/run.py"
