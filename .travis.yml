@@ -4,7 +4,7 @@ os: linux
 
 matrix:
   include:
-  - env: "C:\\issues\\conan_boost_algorithm_1"
+  - DIR="C:\\issues\\conan_boost_algorithm_1"
 
 script:
   - "$DIR/run.py"
