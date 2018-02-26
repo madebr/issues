@@ -13,6 +13,7 @@ environment:
   CMAKE_GENERATOR: Visual Studio 15 2017 Win64
   matrix:
   - DIR: "C:\\issues\\conan_boost_algorithm_1"
+  - DIR: "C:\\issues\\conan_ffmpeg_1"
   - DIR: "C:\\issues\\conan_bullet_1"
 
 matrix:
