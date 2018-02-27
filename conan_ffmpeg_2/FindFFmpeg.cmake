@@ -32,25 +32,25 @@ PATH_SUFFIXES ffmpeg libav
 )
 
 find_library(FFMPEG_LIBAVCODEC
-NAMES avcodec
+NAMES avcodec libavcodec
 PATHS ${_FFMPEG_AVCODEC_LIBRARY_DIRS} /usr/lib /usr/local/lib /opt/local/lib /sw/lib
 PATH_SUFFIXES lib64 lib
 )
 
 find_library(FFMPEG_LIBAVFORMAT
-NAMES avformat
+NAMES avformat libavformat
 PATHS ${_FFMPEG_AVFORMAT_LIBRARY_DIRS} /usr/lib /usr/local/lib /opt/local/lib /sw/lib
 PATH_SUFFIXES lib64 lib
 )
 
 find_library(FFMPEG_LIBAVUTIL
-NAMES avutil
+NAMES avutil libavutil
 PATHS ${_FFMPEG_AVUTIL_LIBRARY_DIRS} /usr/lib /usr/local/lib /opt/local/lib /sw/lib
 PATH_SUFFIXES lib64 lib
 )
 
 find_library(FFMPEG_SWRESAMPLE
-NAMES swresample
+NAMES swresample libswresample
 PATHS ${_FFMPEG_SWRESAMPLE_LIBRARY_DIRS} /usr/lib /usr/local/lib /opt/local/lib /sw/lib
 PATH_SUFFIXES lib64 lib
 )
