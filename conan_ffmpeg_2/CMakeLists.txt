@@ -7,7 +7,10 @@ project("${NAME}")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup(TARGETS)
+conan_basic_setup()
+
+message("CMAKE_INCLUDE_PATH: ${CMAKE_INCLUDE_PATH}")
+message("CMAKE_LIBRARY_PATH: ${CMAKE_LIBRARY_PATH}")
 
 find_package(FFmpeg REQUIRED)
 
