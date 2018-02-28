@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2.2)
 
-set(NAME conan_ffmpeg_issue_1)
+set(NAME conan_ffmpeg_issue_2)
 
 project("${NAME}")
 

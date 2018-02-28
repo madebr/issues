@@ -1,0 +1,10 @@
+[requires]
+boost_system/1.66.0@bincrafters/stable
+boost_program_options/1.66.0@bincrafters/stable
+
+[generators]
+cmake
+
+[options]
+boost_program_options:shared=True
+boost_system:shared=True
