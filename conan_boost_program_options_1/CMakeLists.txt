@@ -25,3 +25,8 @@ add_test(
     NAME "${NAME}"
     COMMAND "$<TARGET_FILE:issue>"
     )
+
+set_tests_properties("${NAME}"
+    PROPERTIES
+        TIMEOUT 10
+    )
