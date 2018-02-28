@@ -4,6 +4,9 @@ set(NAME conan_ffmpeg_issue_2)
 
 project("${NAME}")
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
