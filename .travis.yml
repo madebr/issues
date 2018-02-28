@@ -6,7 +6,7 @@ sudo: required
 
 matrix:
   include:
-  - env: DIR="conan_sdl2_1"
+  - env: DIR="conan_openal_1"
 
 script:
   - pyenv shell 3.6
