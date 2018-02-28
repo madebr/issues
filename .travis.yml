@@ -2,6 +2,8 @@ language: cpp
 
 os: linux
 
+sudo: required
+
 matrix:
   include:
   - env: DIR="conan_ffmpeg_1"
