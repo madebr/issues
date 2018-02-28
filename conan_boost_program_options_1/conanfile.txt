@@ -6,5 +6,4 @@ boost_program_options/1.66.0@bincrafters/stable
 cmake
 
 [options]
-boost_program_options:shared=True
-boost_system:shared=True
+boost_*:shared=True
