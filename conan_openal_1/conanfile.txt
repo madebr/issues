@@ -5,3 +5,4 @@ openal/1.18.2@bincrafters/stable
 cmake
 
 [options]
+libalsa:disable_python=True
