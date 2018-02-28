@@ -4,7 +4,7 @@ os: linux
 
 matrix:
   include:
-  - env: DIR="conan_boost_program_options_1"
+  - env: DIR="conan_ffmpeg_1"
 
 script:
   - pyenv shell 3.6
