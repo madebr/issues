@@ -45,7 +45,7 @@ def init():
         pip_install = [pip_cmd, 'install']
         if sys.platform != 'win32':
             pip_install  += ['--user']
-        pip_install += ['conan']
+        pip_install += ['conan', 'ninja']
         run(pip_install, check=True)
         conan_exec = which('conan')
 
