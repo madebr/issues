@@ -9,5 +9,5 @@ matrix:
   - env: DIR="conan_openal_1"
 
 script:
-  - pyenv shell 3.6
+  - pyenv shell 2.7
   - "$TRAVIS_BUILD_DIR/$DIR/run.py"
