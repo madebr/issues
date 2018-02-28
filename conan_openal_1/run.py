@@ -75,7 +75,7 @@ def build():
 
 
 def test():
-    run(['ctest', '-C', configuration], cwd=bindir, check=True)
+    run(['ctest', '-C', '-V', configuration], cwd=bindir, check=True)
 
 
 if __name__ == '__main__':

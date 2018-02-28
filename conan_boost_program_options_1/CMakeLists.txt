@@ -15,8 +15,7 @@ add_executable(issue main.cpp
     )
 target_link_libraries(issue
     PUBLIC
-        CONAN_PKG::boost_program_options
-        CONAN_PKG::boost_system
+        ${CONAN_LIBS}
     )
 
 enable_testing()
