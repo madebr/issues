@@ -1,9 +1,4 @@
-#include <boost/version.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
-#include <boost/property_tree/ini_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
 
 #include <algorithm>
 #include <iostream>
