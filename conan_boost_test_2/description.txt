@@ -1,0 +1,8 @@
+Problem:
+Linking to static conan-boost_test
+
+What this does:
+Link to static boost-test
+
+Status:
+??
