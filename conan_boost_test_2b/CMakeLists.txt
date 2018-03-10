@@ -10,7 +10,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
-add_executable(issue main.cpp test_nop.cpp)
+add_executable(issue
+    main.cpp
+    main_helper.c
+    test_nop.cpp
+)
+
 target_link_libraries(issue
     PUBLIC
         CONAN_PKG::boost_test
