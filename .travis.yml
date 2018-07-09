@@ -6,8 +6,11 @@ sudo: required
 
 matrix:
   include:
+  - env: DIR="conan_boost_program_options_1"
+  - env: DIR="conan_boost_program_options_2"
   - env: DIR="conan_boost_test_1"
   - env: DIR="conan_boost_test_2"
+  - env: DIR="conan_boost_test_2b"
   - env: DIR="conan_openal_1"
 
 script:
