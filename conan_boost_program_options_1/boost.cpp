@@ -19,5 +19,8 @@ int do_boost(int argc, char **argv) {
     } catch (po::error &ex) {
         std::cout << "Error parsing arguments: " << ex.what() << std::endl;
     }
+    if (vm.count("value")) {
+        std::cout << "value is " << vm["value"].as<size_t>() << "\n";
+    }
     return 0;
 }

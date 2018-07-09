@@ -4,18 +4,21 @@ set(NAME conan_boost)
 
 project("${NAME}")
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+find_package(Boost COMPONENTS program_options system REQUIRED)
+
 add_executable(issue main.cpp
     boost.cpp
     )
 target_link_libraries(issue
-    PUBLIC
-        ${CONAN_LIBS}
+    PRIVATE
+        Boost::program_options
+        Boost::system
     )
 
 enable_testing()

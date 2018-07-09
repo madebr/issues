@@ -8,17 +8,18 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup(TARGETS)
+conan_basic_setup()
+
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 add_executable(issue
     main.cpp
-    main_helper.c
     test_nop.cpp
 )
 
 target_link_libraries(issue
     PUBLIC
-        CONAN_PKG::boost_test
+        Boost::unit_test_framework
     )
 
 enable_testing()

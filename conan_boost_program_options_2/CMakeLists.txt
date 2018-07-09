@@ -4,6 +4,8 @@ set(NAME conan_test_all)
 
 project("${NAME}")
 
+#set(CONAN_LIBCXX "" FORCE)
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
@@ -24,6 +26,14 @@ target_link_libraries(issue
     )
 
 enable_testing()
+
+if(0)
+    if(CONAN_SETTINGS_COMPILER_LIBCXX STREQUAL "libstdc++11")
+        target_compile_definitions(issue PRIVATE _GLIBCXX_USE_CXX11_ABI=1)
+    elseif(CONAN_SETTINGS_COMPILER_LIBCXX STREQUAL "libstdc++")
+        target_compile_definitions(issue PRIVATE _GLIBCXX_USE_CXX11_ABI=1)
+    endif()
+endif()
 
 add_test(
     NAME "${NAME}"

@@ -10,14 +10,14 @@ class AllLibsTesterCoan(ConanFile):
         'dynamic_libs': [True, False],
     }
     default_options = (
-          'dynamic_libs=False',
+        'dynamic_libs=False',
     )
 
     generators = 'cmake',
 
     _dependencies = {
         'cmake': ('cmake_findboost_modular/1.66.0@bincrafters/stable', ),
-        'boost': ('boost_program_options/1.66.0@bincrafters/stable', ),
+        'boost': ('boost_test/1.66.0@bincrafters/stable', ),
     }
 
     def requirements(self):
@@ -26,7 +26,7 @@ class AllLibsTesterCoan(ConanFile):
                 self.requires(dep)
 
     def configure(self):
-        self.options['boost_program_options'].shared = self.options.dynamic_libs
+        self.options['boost_test'].shared = self.options.dynamic_libs
 
     def _configure_cmake(self):
         cmake = CMake(self)
@@ -35,7 +35,6 @@ class AllLibsTesterCoan(ConanFile):
 
     def build(self):
         cmake = self._configure_cmake()
-        cmake.definitions['BOOST_STATIC'] = not self.options['boost_program_options'].shared
         cmake.build()
         # cmake.test()
 
