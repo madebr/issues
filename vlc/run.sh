@@ -13,4 +13,4 @@ cmake "$CURDIR"
 
 make
 
-./window & ( sleep 10 && killall window )
+./window & ( sleep 5 && killall window )
