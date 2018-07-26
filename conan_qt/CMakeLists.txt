@@ -1,0 +1,21 @@
+project(test_package)
+cmake_minimum_required(VERSION 3.1.0)
+
+set(CMAKE_VERBOSE_MAKEFILE TRUE)
+
+include(${CMAKE_BINARY_DIR}/../conanbuildinfo.cmake)
+conan_basic_setup(KEEP_RPATHS)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
+# Find the QtCore library
+find_package(Qt5Core CONFIG REQUIRED)
+
+add_executable(${PROJECT_NAME}
+    main.cpp
+    greeter.hpp
+    greeter.cpp
+    )
+target_link_libraries(${PROJECT_NAME} Qt5::Core)
