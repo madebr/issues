@@ -15,7 +15,6 @@ public:
         : QWidget( parent )
     {
         setWindowFlags( Qt::ToolTip );
-
         resize( 40, 40 );
     }
     void setTip( const QPoint& pos)
@@ -68,13 +67,11 @@ public:
 protected:
     void mouseMoveEvent( QMouseEvent *event ) Q_DECL_OVERRIDE
     {
-        int margin = 24; //handleLength();
+        int margin = 24;
         int posX = qMax( rect().left() + margin, qMin( rect().right() - margin, event->x() ) );
 
-        QString chapterLabel;
-
-        QPoint target( event->globalX() - ( event->x() - posX ), QWidget::mapToGlobal( QPoint( 0, 0 ) ).y() );
-        mTimeTooltip->setTip( target );
+        QPoint pos( event->globalX() - ( event->x() - posX ), QWidget::mapToGlobal( QPoint( 0, 0 ) ).y() );
+        mTimeTooltip->setTip( pos );
         event->accept();
     }
     void enterEvent( QEvent * ) Q_DECL_OVERRIDE
@@ -85,10 +82,8 @@ protected:
     {
         mTimeTooltip->hide();
     }
-
 private:
     TimeTooltip *mTimeTooltip;
-
 };
 
 class MainWindow : public QMainWindow
@@ -97,10 +92,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr)
 	    : QMainWindow(parent)
     {
+        auto central = new QWidget;
         auto slider = new SeekSlider{};
         slider->setEnabled(true);
-
-        auto central = new QWidget;
         auto layout = new QVBoxLayout;
         layout->addStretch();
         layout->addWidget(slider);
@@ -109,19 +103,12 @@ public:
     }
 };
 
-
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    // Main Window with the slider
     MainWindow mw;
     mw.show();
-
-    // Create another smaller window to steal focus
-    QWidget widget;
-    widget.resize(5, 5);
-    widget.show();
 
     return app.exec();
 }
