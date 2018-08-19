@@ -12,15 +12,14 @@ elseif(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     conan_basic_setup(KEEP_RPATHS)
 else()
-    message(INFO "NO CONAN")
+    message(STATUS "NO CONAN")
 endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5Core CONFIG REQUIRED)
-find_package(Qt5Gui CONFIG REQUIRED)
+find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5OpenGL CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME} WIN32
@@ -35,4 +34,8 @@ add_executable(${PROJECT_NAME} WIN32
 
     )
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::OpenGL)
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        Qt5::Widgets
+        Qt5::OpenGL
+    )

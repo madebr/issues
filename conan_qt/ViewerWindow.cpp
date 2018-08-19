@@ -172,7 +172,6 @@ void ViewerWindow::loadGame(const QString& path) {
 }
 
 void ViewerWindow::showObjectModel(uint16_t) {
-#pragma message("implement me")
 }
 
 void ViewerWindow::updateRecentGames() {
