@@ -17,7 +17,6 @@ endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
 
 find_package(Qt5Widgets CONFIG REQUIRED)
 find_package(Qt5OpenGL CONFIG REQUIRED)
