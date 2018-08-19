@@ -3,7 +3,7 @@ cache:
   - C:\.conan -> .cache
 
 configuration:
-#  - Debug
+  - Debug
   - Release
 
 environment:
