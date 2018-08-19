@@ -18,23 +18,13 @@ endif()
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt5Widgets CONFIG REQUIRED)
-find_package(Qt5OpenGL CONFIG REQUIRED)
+find_package( Qt5Widgets REQUIRED )
 
 add_executable(${PROJECT_NAME} WIN32
     main.cpp
-
-    ViewerWindow.hpp
-    ViewerWindow.cpp
-
-    QOpenGLContextWrapper.hpp
-    QOpenGLContextWrapper.cpp
-
-
     )
 
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE
-        Qt5::Widgets
-        Qt5::OpenGL
+    Qt5::WinMain
+    Qt5::Widgets
     )

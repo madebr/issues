@@ -1,11 +1,10 @@
 #include <QApplication>
-#include "ViewerWindow.hpp"
+#include <QLabel>
 
-int main(int argc, char *argv[]) {
-    QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
+int main(int argc, char* argv[])
+{
     QApplication app(argc, argv);
-
-    ViewerWindow viewer;
-
+    QLabel label("Hello, world!");
+    label.show();
     return app.exec();
 }
