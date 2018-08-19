@@ -10,8 +10,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-# Find the QtCore library
 find_package(Qt5Core CONFIG REQUIRED)
+find_package(Qt5OpenGL CONFIG REQUIRED)
 
 add_executable(${PROJECT_NAME}
     main.cpp

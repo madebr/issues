@@ -1,23 +1,22 @@
-#include "greeter.hpp"
+#include <QApplication>
+#include <QGLFormat>
 
-#include <QCoreApplication>
-#include <QObject>
-#include <QString>
-#include <QTimer>
+#include "glwidget.h"
 
-int main(int argc, char *argv[]){
-    QCoreApplication app(argc, argv);
-    QCoreApplication::setApplicationName("Application Example");
-    QCoreApplication::setApplicationVersion("1.0.0");
+int main( int argc, char* argv[] )
+{
+ QApplication a( argc, argv );
 
-    QString name = argc > 0 ? argv[1] : "";
-    if (name.isEmpty()) {
-        name = "World";
-    }
+// Specify an OpenGL 3.3 format using the Core profile.
+ // That is, no old-school fixed pipeline functionality
+ QGLFormat glFormat;
+ glFormat.setVersion( 3, 3 );
+ glFormat.setProfile( QGLFormat::CoreProfile ); // Requires >=Qt-4.8.0
+ glFormat.setSampleBuffers( true );
 
-    Greeter* greeter = new Greeter(name, &app);
-    QObject::connect(greeter, &Greeter::finished, &app, QCoreApplication::quit);
-    QTimer::singleShot(0, greeter, SLOT(run()));
+// Create a GLWidget requesting our format
+ GLWidget w( glFormat );
+ w.show();
 
-    return app.exec();
+return a.exec();
 }
