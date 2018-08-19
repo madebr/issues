@@ -21,6 +21,11 @@ target_link_libraries(issue
         Boost::system
     )
 
+target_compile_definitions(issue
+    PUBLIC
+        _GLIBCXX_USE_CXX11_ABI=0
+    )
+
 enable_testing()
 
 add_test(

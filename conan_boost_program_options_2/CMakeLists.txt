@@ -27,14 +27,6 @@ target_link_libraries(issue
 
 enable_testing()
 
-if(0)
-    if(CONAN_SETTINGS_COMPILER_LIBCXX STREQUAL "libstdc++11")
-        target_compile_definitions(issue PRIVATE _GLIBCXX_USE_CXX11_ABI=1)
-    elseif(CONAN_SETTINGS_COMPILER_LIBCXX STREQUAL "libstdc++")
-        target_compile_definitions(issue PRIVATE _GLIBCXX_USE_CXX11_ABI=1)
-    endif()
-endif()
-
 add_test(
     NAME "${NAME}"
     COMMAND "$<TARGET_FILE:issue>"

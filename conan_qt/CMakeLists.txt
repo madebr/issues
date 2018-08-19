@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1.0)
 
 set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
-include(${CMAKE_BINARY_DIR}/../conanbuildinfo.cmake)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(KEEP_RPATHS)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)

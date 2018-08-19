@@ -1,4 +1,4 @@
-#include "greeter.h"
+#include "greeter.hpp"
 
 #include <QCoreApplication>
 #include <QObject>
@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
     }
 
     Greeter* greeter = new Greeter(name, &app);
-    QObject::connect(greeter, Greeter::finishedfinished, &app, QCoreApplication::quit);
+    QObject::connect(greeter, &Greeter::finished, &app, QCoreApplication::quit);
     QTimer::singleShot(0, greeter, SLOT(run()));
 
     return app.exec();
