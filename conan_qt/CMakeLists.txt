@@ -20,7 +20,7 @@ find_package(Qt5Core CONFIG REQUIRED)
 find_package(Qt5Gui CONFIG REQUIRED)
 find_package(Qt5OpenGL CONFIG REQUIRED)
 
-add_executable(${PROJECT_NAME}
+add_executable(${PROJECT_NAME} WIN32
     main.cpp
     openglwindow.h
     openglwindow.cpp
