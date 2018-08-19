@@ -58,11 +58,12 @@ def init():
 
 
 def build():
-    conan_install = ['conan', 'install', '-u', str(srcdir), '-s', 'build_type={}'.format(configuration), '--build=missing']
-    if platform.system() == 'Windows':
-        conan_install += ['-s', 'arch={}'.format('x86_64' if 'Win64' in cmake_generator else 'x86')]
-        conan_install += ['-s', 'compiler.runtime={}'.format(std_runtime)]
-    run(conan_install, cwd=bindir, check=True)
+    for config in ['Release', 'Debug']:
+        conan_install = ['conan', 'install', '-u', str(srcdir), '-s', 'build_type={}'.format(config), '--build=missing']
+        if platform.system() == 'Windows':
+            conan_install += ['-s', 'arch={}'.format('x86_64' if 'Win64' in cmake_generator else 'x86')]
+            conan_install += ['-s', 'compiler.runtime={}'.format(std_runtime)]
+        run(conan_install, cwd=bindir, check=True)
 
     env = dict(os.environ)
     if platform.system() == 'Windows':

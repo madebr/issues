@@ -2,6 +2,6 @@
 Qt/5.11.1@bincrafters/stable
 
 [generators]
-cmake
+cmake_multi
 
 [options]
