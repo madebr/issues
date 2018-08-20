@@ -71,10 +71,6 @@ def build():
         run(conan_install, cwd=bindir, check=True)
 
     env = dict(os.environ)
-    if platform.system() == 'Windows':
-        cflags = '/{}'.format(std_runtime)
-        env['CFLAGS'] = cflags
-        env['CXXFLAGS'] = cflags
     run(['cmake', str(srcdir), '-DCMAKE_BUILD_TYPE={}'.format(configuration), '-G{}'.format(cmake_generator)], cwd=bindir, check=True, env=env)
     run(['cmake', '--build', str(bindir), '--config', configuration], cwd=bindir, check=True)
 
