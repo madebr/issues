@@ -22,11 +22,34 @@ set(CMAKE_MODULE_PATH
 
 message("CMAKE_MODULE_PATH after fix: ${CMAKE_MODULE_PATH}")
         
-
 find_package(Qt5Widgets REQUIRED)
-get_target_property(QT5_W_IC Qt5::Widgets IMPORTED_CONFIGURATIONS)
 
+get_target_property(QT5_W_IC Qt5::Widgets IMPORTED_CONFIGURATIONS)
 message("Qt5::Widgets IMPORTED_CONFIGURATIONS: ${QT5_W_IC}")
+
+get_target_property(QT5_W_LI Qt5::Widgets INTERFACE_LINK_LIBRARIES)
+message("Qt5::Widgets INTERFACE_LINK_LIBRARIES: ${QT5_W_LI}")
+
+get_target_property(QT5_W_IL Qt5::Widgets IMPORTED_LOCATION)
+get_target_property(QT5_W_IL_R Qt5::Widgets IMPORTED_LOCATION_RELEASE)
+get_target_property(QT5_W_IL_D Qt5::Widgets IMPORTED_LOCATION_REBUG)
+message("Qt5::Widgets IMPORTED_LOCATION: ${QT5_W_IL}")
+message("Qt5::Widgets IMPORTED_LOCATION_RELEASE: ${QT5_W_IL_R}")
+message("Qt5::Widgets IMPORTED_LOCATION_DEBUG: ${QT5_W_IL_D}")
+
+get_target_property(QT5_W_ILIL Qt5::Widgets IMPORTED_LINK_INTERFACE_LIBRARIES)
+get_target_property(QT5_W_ILIL_R Qt5::Widgets IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE)
+get_target_property(QT5_W_ILIL_D Qt5::Widgets IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG)
+message("Qt5::Widgets IMPORTED_LINK_INTERFACE_LIBRARIES: ${QT5_W_ILIL}")
+message("Qt5::Widgets IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE: ${QT5_W_ILIL_R}")
+message("Qt5::Widgets IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG: ${QT5_W_ILIL_D}")
+
+get_target_property(QT5_W_II Qt5::Widgets IMPORTED_IMPLIB)
+get_target_property(QT5_W_II_R Qt5::Widgets IMPORTED_IMPLIB_RELEASE)
+get_target_property(QT5_W_II_D Qt5::Widgets IMPORTED_IMPLIB_DEBUG)
+message("Qt5::Widgets IMPORTED_IMPLIB: ${QT5_W_II}")
+message("Qt5::Widgets IMPORTED_IMPLIB_RELEASE: ${QT5_W_II_R}")
+message("Qt5::Widgets IMPORTED_IMPLIB_DEBUG: ${QT5_W_II_D}")
 
 add_executable(${PROJECT_NAME}
     main.cpp
