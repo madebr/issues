@@ -24,6 +24,14 @@ message("CMAKE_MODULE_PATH after fix: ${CMAKE_MODULE_PATH}")
         
 find_package(Qt5Widgets REQUIRED)
 
+get_target_property(QT5_C_IID Qt5::Core INTERFACE_INCLUDE_DIRECTORIES)
+message("Qt5::Core INTERFACE_INCLUDE_DIRECTORIES: ${QT5_C_IID}")
+get_target_property(QT5_G_IID Qt5::Gui INTERFACE_INCLUDE_DIRECTORIES)
+message("Qt5::Gui INTERFACE_INCLUDE_DIRECTORIES: ${QT5_G_IID}")
+
+get_target_property(QT5_W_IID Qt5::Widgets INTERFACE_INCLUDE_DIRECTORIES)
+message("Qt5::Widgets INTERFACE_INCLUDE_DIRECTORIES: ${QT5_W_IID}")
+
 get_target_property(QT5_W_IC Qt5::Widgets IMPORTED_CONFIGURATIONS)
 message("Qt5::Widgets IMPORTED_CONFIGURATIONS: ${QT5_W_IC}")
 
