@@ -1,27 +1,35 @@
 project(test_package)
 cmake_minimum_required(VERSION 3.1.0)
 
-set(CMAKE_VERBOSE_MAKEFILE TRUE)
+set(CMAKE_BUILD_TYPE "Release" CACHE STRING "BUILD_TYPE" FORCE)
 
 if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake")
     message(STATUS "Using conan 'cmake_multi' generator")
     include("${CMAKE_BINARY_DIR}/conanbuildinfo_multi.cmake")
-    conan_basic_setup(TARGETS)
-elseif(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-    message(STATUS "Using conan 'cmake' generator")
-    include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-    conan_basic_setup(TARGETS)
+    conan_basic_setup()
 else()
-    message(STATUS "NO CONAN")
+    message(FATAL_ERROR "NO CONAN")
 endif()
+
+message("CMAKE_MODULE_PATH before fix: ${CMAKE_MODULE_PATH}")
+
+set(CMAKE_PREFIX_PATH
+    ${CONAN_CMAKE_MODULE_PATH_DEBUG} ${CONAN_CMAKE_MODULE_PATH_RELEASE} ${CMAKE_PREFIX_PATH}
+    )
+set(CMAKE_MODULE_PATH
+    ${CONAN_CMAKE_MODULE_PATH_DEBUG} ${CONAN_CMAKE_MODULE_PATH_RELEASE} ${CMAKE_MODULE_PATH}
+    )
+
+message("CMAKE_MODULE_PATH after fix: ${CMAKE_MODULE_PATH}")
+        
+        
 
 find_package(Qt5Widgets REQUIRED)
 
-add_executable(${PROJECT_NAME} WIN32
+add_executable(${PROJECT_NAME}
     main.cpp
     )
 
 target_link_libraries(${PROJECT_NAME}
-    Qt5::WinMain
     Qt5::Widgets
     )
