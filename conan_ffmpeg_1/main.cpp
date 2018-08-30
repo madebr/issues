@@ -39,13 +39,28 @@ void loadFromFile(const std::string &filename) {
         return;
     }
 
-    AVStream* audioStream = formatContext->streams[streamIndex];
-    AVCodecContext* codecContext = audioStream->codec;
-    codecContext->codec = codec;
-
-    // Open the codec
-    if (avcodec_open2(codecContext, codecContext->codec, NULL) != 0) {
+        // Initialize codec context for the decoder.
+    AVCodecContext* codecContext = avcodec_alloc_context3(codec);
+    if (!codecContext) {
         av_frame_free(&frame);
+        avformat_close_input(&formatContext);
+        puts("Couldn't allocate a decoding context.");
+        return;
+    }
+
+    // Fill the codecCtx with the parameters of the codec used in the read file.
+    if (avcodec_parameters_to_context(codecContext, audioStream->codecpar) !=
+        0) {
+        avcodec_close(codecContext);
+        avcodec_free_context(&codecContext);
+        avformat_close_input(&formatContext);
+        puts("Couldn't find parametrs for context");
+    }
+
+    // Initialize the decoder.
+    if (avcodec_open2(codecContext, codec, nullptr) != 0) {
+        avcodec_close(codecContext);
+        avcodec_free_context(&codecContext);
         avformat_close_input(&formatContext);
         puts("Couldn't open the audio codec context");
         return;
@@ -100,7 +115,7 @@ void loadFromFile(const std::string &filename) {
 }
 
 int main(int argc, char **argv) {
-    av_register_all();
+    //av_register_all();
 
     for(auto i = 1; i < argc; ++i)
         loadFromFile(argv[i]);

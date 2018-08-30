@@ -1,5 +1,5 @@
 [requires]
-ffmpeg/3.4@bincrafters/stable
+ffmpeg/4.0@bincrafters/stable
 
 [generators]
 cmake

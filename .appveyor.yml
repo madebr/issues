@@ -3,7 +3,7 @@ cache:
   - C:\.conan -> .cache
 
 configuration:
-  - Debug
+  #- Debug
   - Release
 
 environment:
@@ -17,9 +17,9 @@ environment:
   #- DIR: "C:\\issues\\conan_boost_test_2"
   #- DIR: "C:\\issues\\conan_boost_program_options_1"
   #- DIR: "C:\\issues\\conan_ffmpeg_2"
-  #- DIR: "C:\\issues\\conan_ffmpeg_1"
+  - DIR: "C:\\issues\\conan_ffmpeg_1"
   #- DIR: "C:\\issues\\conan_bullet_1"
-  - DIR: "C:\\issues\\conan_qt"
+  #- DIR: "C:\\issues\\conan_qt"
 
 matrix:
   fast_finish: false
