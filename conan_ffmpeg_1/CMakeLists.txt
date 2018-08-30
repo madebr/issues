@@ -16,6 +16,13 @@ target_link_libraries(issue
         CONAN_PKG::ffmpeg
     )
 
+if(MSVC)
+    target_compile_options(issue
+	PUBLIC
+	    "/wd4099"
+	)
+endif()
+
 enable_testing()
 
 add_test(

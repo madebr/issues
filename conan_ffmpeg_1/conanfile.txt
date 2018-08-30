@@ -5,4 +5,3 @@ ffmpeg/4.0@bincrafters/stable
 cmake
 
 [options]
-ffmpeg:shared=True

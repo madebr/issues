@@ -1,7 +1,10 @@
 extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
+#include <libavformat/avio.h>
 #include <libavutil/avutil.h>
+#include <libavutil/opt.h>
+#include <libswresample/swresample.h>
 }
 
 #include <string>
@@ -30,16 +33,18 @@ void loadFromFile(const std::string &filename) {
     }
 
     // Find the audio stream
-    AVCodec* codec = nullptr;
-    int streamIndex = av_find_best_stream(formatContext, AVMEDIA_TYPE_AUDIO, -1, -1, &codec, 0);
+    int streamIndex = av_find_best_stream(formatContext, AVMEDIA_TYPE_AUDIO, -1,
+                                          -1, nullptr, 0);
     if (streamIndex < 0) {
         av_frame_free(&frame);
         avformat_close_input(&formatContext);
         puts("Could not find any audio stream");
         return;
     }
-
-        // Initialize codec context for the decoder.
+    AVStream* audioStream = formatContext->streams[streamIndex];
+    AVCodec* codec = avcodec_find_decoder(audioStream->codecpar->codec_id);
+    
+    // Initialize codec context for the decoder.
     AVCodecContext* codecContext = avcodec_alloc_context3(codec);
     if (!codecContext) {
         av_frame_free(&frame);
@@ -80,32 +85,30 @@ void loadFromFile(const std::string &filename) {
         if (readingPacket.stream_index == audioStream->index) {
             AVPacket decodingPacket = readingPacket;
 
-            while (decodingPacket.size > 0) {
-                // Decode audio packet
-                int gotFrame = 0;
-                int len = avcodec_decode_audio4(codecContext, frame, &gotFrame, &decodingPacket);
+            int sendPacket = avcodec_send_packet(codecContext, &decodingPacket);
+            int receiveFrame = 0;
 
-                if (len >= 0 && gotFrame) {
+            while ((receiveFrame =
+                        avcodec_receive_frame(codecContext, frame)) == 0) {
+                // Decode audio packet
+
+                if (receiveFrame == 0 && sendPacket == 0) {
                     // Write samples to audio buffer
 
-                    for(size_t i = 0; i < static_cast<size_t>(frame->nb_samples); i++) {
+                    for (size_t i = 0;
+                         i < static_cast<size_t>(frame->nb_samples); i++) {
                         // Interleave left/right channels
-                        for(size_t channel = 0; channel < channels; channel++) {
-                            int16_t sample = reinterpret_cast<int16_t *>(frame->data[channel])[i];
+                        for (size_t channel = 0; channel < channels;
+                             channel++) {
+                            int16_t sample = reinterpret_cast<int16_t*>(
+                                frame->data[channel])[i];
                             data.push_back(sample);
                         }
                     }
-
-                    decodingPacket.size -= len;
-                    decodingPacket.data += len;
-                }
-                else {
-                    decodingPacket.size = 0;
-                    decodingPacket.data = nullptr;
                 }
             }
         }
-        av_free_packet(&readingPacket);
+        av_packet_unref(&readingPacket);
     }
 
     // Cleanup
@@ -115,6 +118,8 @@ void loadFromFile(const std::string &filename) {
 }
 
 int main(int argc, char **argv) {
+    //av_register_all();
+
     for(auto i = 1; i < argc; ++i)
         loadFromFile(argv[i]);
 
