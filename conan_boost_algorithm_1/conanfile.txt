@@ -1,8 +1,0 @@
-[requires]
-cmake_findboost_modular/1.66.0@bincrafters/stable
-boost_algorithm/1.66.0@bincrafters/stable
-
-[generators]
-cmake
-
-[options]

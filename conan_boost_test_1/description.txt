@@ -1,8 +1,0 @@
-Problem:
-Linking to dynamic conan-boost_test
-
-What this does:
-Link to dynamic boost-test
-
-Status:
-??

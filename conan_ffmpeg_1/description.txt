@@ -1,9 +1,0 @@
-Problem:
-conan-ffmpeg misses some dependencies
-
-What this does:
-- Link to default conan-ffmpeg
-- Compile an example audio read program
-
-status:
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library [C:\issues\conan_ffmpeg_1\build\issue.vcxproj]

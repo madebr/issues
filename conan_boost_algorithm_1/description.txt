@@ -1,5 +1,0 @@
-Problem:
-cmake_findboost_modular does not add the include dirs of boost_algorithm to the cmake var Boost_INCLUDE_DIRS.
-
-Status:
-???

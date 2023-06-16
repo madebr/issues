@@ -1,9 +1,0 @@
-Problem:
-Dynamic bullet library does not export gContactProcessedCallback
-
-What this does:
-- Link to dynamic conan-bullet
-- Try to set global gContactProcessedCallback callback
-
-Status:
-error LNK2001: unresolved external symbol "bool (__cdecl* gContactProcessedCallback)(class btManifoldPoint &,void *,void *)" (?gContactProcessedCallback@@3P6A_NAEAVbtManifoldPoint@@PEAX1@ZEA)

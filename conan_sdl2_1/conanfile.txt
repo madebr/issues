@@ -1,8 +1,0 @@
-[requires]
-sdl2/2.0.7@bincrafters/stable
-
-[generators]
-cmake
-
-[options]
-sdl2:shared=True

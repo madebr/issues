@@ -1,8 +1,0 @@
-Problem:
-Linking to static conan-boost_test (with user cpp_main)
-
-What this does:
-Link to static boost-test (with user cpp_main)
-
-Status:
-??

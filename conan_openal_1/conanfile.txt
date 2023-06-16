@@ -1,8 +1,0 @@
-[requires]
-openal/1.18.2@bincrafters/stable
-
-[generators]
-cmake
-
-[options]
-libalsa:disable_python=True
