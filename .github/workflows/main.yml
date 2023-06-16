@@ -9,13 +9,13 @@ jobs:
     steps:
     - name: Set up SDL
       id: sdl
-      uses: madebr/setup-sdl
+      uses: madebr/setup-sdl@master
       with:
         version: 3-head
-
+    - uses: actions/checkout@v3
     - name: Configure (CMake)
       run: |
-      	cmake -S . -B build -DCMAKE_PREFIX_PATH=${{ steps.sdl.prefix }}
+      	cmake -S . -B build -DCMAKE_PREFIX_PATH=${{ steps.sdl.outputs.prefix }}
     - name: Build (CMake)
       run: |
         cmake --build build
