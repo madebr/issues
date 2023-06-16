@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Configure (CMake)
       run: |
-      	cmake -S . -B build -DCMAKE_PREFIX_PATH=${{ steps.sdl.outputs.prefix }}
+        cmake -S . -B build -DCMAKE_PREFIX_PATH=${{ steps.sdl.outputs.prefix }}
     - name: Build (CMake)
       run: |
         cmake --build build
