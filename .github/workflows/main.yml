@@ -1,0 +1,22 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up SDL
+      id: sdl
+      uses: madebr/setup-sdl
+      with:
+        version: 3-head
+
+    - name: Configure (CMake)
+      run: |
+      	cmake -S . -B build -DCMAKE_PREFIX_PATH=${{ steps.sdl.prefix }}
+    - name: Build (CMake)
+      run: |
+        cmake --build build
+
