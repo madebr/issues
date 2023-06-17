@@ -3,9 +3,16 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  Build:
-    runs-on: windows-latest
+  build:
+    runs-on: ${{ matrix.platform.os }}
 
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { os: windows-latest }
+          - { os: macos-latest }
+          - { os: ubuntu-latest }
     steps:
     - name: Set up SDL
       id: sdl
