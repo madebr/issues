@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
         SDL_Quit();
         return 1;
     }
-    SDL_SetWindowTitle(window, "SDL issue!");
+    SDL_SetWindowTitle(window, "SDL issue");
 
     while (1) {
         int finished = 0;
