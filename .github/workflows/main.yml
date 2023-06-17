@@ -14,6 +14,10 @@ jobs:
           - { os: macos-latest }
           - { os: ubuntu-latest }
     steps:
+    - uses: ilammy/msvc-dev-cmd@v1
+      if: ${{ matrix.platform.os == 'windows-latest' }}
+      with:
+        arch: x64
     - name: Set up SDL
       id: sdl
       uses: madebr/setup-sdl@master
