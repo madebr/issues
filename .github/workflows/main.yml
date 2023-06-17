@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses:  jwlawson /actions-setup-cmake@master
     - name: Set up SDL
       id: sdl
       uses: madebr/setup-sdl@master
