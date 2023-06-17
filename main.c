@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
     SDL_Window *window = NULL;
     SDL_Renderer *renderer = NULL;
 
-    if (SDL_CreateWindowAndRenderer(640, 480, 0, &window, &renderer) < 0) {
+    if (SDL_CreateWindowAndRenderer(640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0) {
         SDL_Log("SDL_CreateWindowAndRenderer failed (%s)", SDL_GetError());
         SDL_Quit();
         return 1;
