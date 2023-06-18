@@ -19,7 +19,7 @@ jobs:
 #        - { name: 'windows: clang32', os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'clang32', msys-env: 'mingw-w64-clang-i686' }
 #        - { name: 'windows: ucrt64',  os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'ucrt64',  msys-env: 'mingw-w64-ucrt-x86_64 '}
         - { name: 'windows: MSVC',    os: windows-latest,     shell: 'pwsh',        msvc: true,   msvc_arch: x64 }
-        - { name: 'linux: MinGW',     os: ubuntu-latest,      shell: 'bash',        cmake-toolchain-file: '${{ github.workspace }}/cmake/mingw64.cmake', apt-packages: 'mingw-w64'}
+        - { name: 'linux: MinGW',     os: ubuntu-latest,      shell: 'bash',        cmake-toolchain-file: 'cmake/mingw64.cmake', apt-packages: 'mingw-w64'}
         - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', }
         - { name: 'macos: default',   os: macos-latest,       shell: 'sh', }
     steps:
