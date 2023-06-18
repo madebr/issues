@@ -4,25 +4,44 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: ${{ matrix.platform.name }}
     runs-on: ${{ matrix.platform.os }}
+
+    defaults:
+      run:
+        shell: ${{ matrix.platform.shell }}
 
     strategy:
       fail-fast: false
       matrix:
         platform:
-          - { os: windows-latest }
-          - { os: macos-latest }
-          - { os: ubuntu-latest }
+        - { name: 'windows: mingw64',   os: 'windows-latest', shell: 'msys2 {0}',  msys2: true, msystem: 'mingw64', msys-env: 'mingw-w64-x86_64' }
+        - { name: 'windows: clang32', os: windows-latest,   shell: 'msys2 {0}',  msys2: true, msystem: clang32, msys-env: mingw-w64-clang-i686 }
+        - { name: 'windows: ucrt64',  os: windows-latest,   shell: 'msys2 {0}',  msys2: true, msystem: ucrt64,  msys-env: mingw-w64-ucrt-x86_64 }
+        - { name: 'windows: MSVC',    os: windows-latest,   shell: 'pwsh',       msvc: true,  msvc_arch: x64 }
+        - { name: 'linux: default',   os: macos-latest,     shell: 'bash', }
+        - { name: 'macos: default',   os: ubuntu-latest,    shell: 'sh', }
     steps:
     - uses: ilammy/msvc-dev-cmd@v1
-      if: ${{ matrix.platform.os == 'windows-latest' }}
+      if: ${{ matrix.platform.msvc }}
       with:
-        arch: x64
+        arch: ${{ matrix.platform.msvc_arch }}
+    - name: Set up MSYS2
+      if: ${{ matrix.platform.msys2 }}
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.platform.msystem }}
+        install: >-
+          ${{ matrix.platform.msys-env }}-cc
+          ${{ matrix.platform.msys-env }}-cmake
+          ${{ matrix.platform.msys-env }}-ninja
+          ${{ matrix.platform.msys-env }}-pkg-config
     - name: Set up SDL
       id: sdl
       uses: madebr/setup-sdl@master
       with:
         version: 3-head
+        shell: ${{ matrix.platform.shell }}
     - uses: actions/checkout@v3
     - name: Configure (CMake)
       run: |
