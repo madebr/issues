@@ -47,7 +47,7 @@ jobs:
       id: sdl
       uses: madebr/setup-sdl@experimental
       with:
-        version: 3-head
+        version: 2-latest
         shell: ${{ matrix.platform.shell }}
         cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
     - name: Configure (CMake)
