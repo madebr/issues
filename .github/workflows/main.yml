@@ -15,18 +15,18 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-#        - { name: 'windows: mingw64',   os: 'windows-latest', shell: 'msys2 {0}',   msys2: true,  msystem: 'mingw64', msys-env: 'mingw-w64-x86_64' }
+        - { name: 'windows: mingw64',   os: 'windows-latest', shell: 'msys2 {0}',   msys2: true,  msystem: 'mingw64', msys-env: 'mingw-w64-x86_64' }
 #        - { name: 'windows: clang32', os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'clang32', msys-env: 'mingw-w64-clang-i686' }
 #        - { name: 'windows: ucrt64',  os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'ucrt64',  msys-env: 'mingw-w64-ucrt-x86_64 '}
-#        - { name: 'windows: MSVC',    os: windows-latest,     shell: 'pwsh',        msvc: true,   msvc_arch: x64 }
+        - { name: 'windows: MSVC',    os: windows-latest,     shell: 'pwsh',        msvc: true,   msvc_arch: x64 }
 #        - { name: 'linux: MinGW',     os: ubuntu-latest,      shell: 'bash',        cmake-toolchain-file: 'cmake/mingw64.cmake', apt-packages: 'mingw-w64'}
         - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', }
-#        - { name: 'macos: default',   os: macos-latest,       shell: 'sh', }
+        - { name: 'macos: default',   os: macos-latest,       shell: 'sh', }
     steps:
-    - uses: ilammy/msvc-dev-cmd@v1
-      if: ${{ matrix.platform.msvc }}
-      with:
-        arch: ${{ matrix.platform.msvc_arch }}
+#    - uses: ilammy/msvc-dev-cmd@v1
+#      if: ${{ matrix.platform.msvc }}
+#      with:
+#        arch: ${{ matrix.platform.msvc_arch }}
     - name: Set up MSYS2
       if: ${{ matrix.platform.msys2 }}
       uses: msys2/setup-msys2@v2
