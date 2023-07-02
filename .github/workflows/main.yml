@@ -24,7 +24,7 @@ jobs:
 #        - { name: 'windows: MSVC',    os: windows-latest,     shell: 'pwsh',        msvc: true,   msvc_arch: x64 }
 #        - { name: 'linux: MinGW',     os: ubuntu-latest,      shell: 'bash',        cmake-toolchain-file: 'cmake/mingw64.cmake', apt-packages: 'mingw-w64'}
         - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', docker: 'fedora:rawhide', prepare: 'sudo dnf install -y gcc g++'}
-        - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', docker: 'ubuntu:23.04', prepare: 'apt-get install -y build-essantial'}
+        - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', docker: 'ubuntu:23.04', prepare: 'apt-get update -y && apt-get install -y build-essantial'}
 #        - { name: 'macos: default',   os: macos-latest,       shell: 'sh', }
     steps:
 #    - uses: ilammy/msvc-dev-cmd@v1
