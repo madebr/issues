@@ -47,7 +47,7 @@ jobs:
       id: sdl3
       uses: madebr/setup-sdl@experimental
       with:
-        cmake-build-type: Release
+        build-type: Release
         version: b1a0bc3fb0ad2198500cbddc2e8c73d8ec39de31
         shell: ${{ matrix.platform.shell }}
         cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
