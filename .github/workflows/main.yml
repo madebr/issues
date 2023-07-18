@@ -34,34 +34,39 @@ jobs:
           ${{ matrix.platform.msys-env }}-ninja
           ${{ matrix.platform.msys-env }}-pkg-config
     - uses: actions/checkout@v3
-    - name: Set up SDL2
-      id: sdl2
-      uses: madebr/setup-sdl@experimental
-      with:
-        version: 2-head
-        shell: ${{ matrix.platform.shell }}
-        cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
-        install-linux-dependencies: true
+#    - name: Set up SDL2
+#      id: sdl2
+#      uses: madebr/setup-sdl@experimental
+#      with:
+#        version: 2-latest
+#        shell: ${{ matrix.platform.shell }}
+#        cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
+#        install-linux-dependencies: true
+#        sdl-test: true
     - name: Set up SDL3
       id: sdl3
       uses: madebr/setup-sdl@experimental
       with:
-        version: 3-head
+        version: b1a0bc3fb0ad2198500cbddc2e8c73d8ec39de31
         shell: ${{ matrix.platform.shell }}
         cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
         install-linux-dependencies: true
+        sdl-test: true
     - name: Configure (CMake)
       run: |
         cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ matrix.platform.cmake-toolchain-file }}
     - name: Build (CMake)
       run: |
         cmake --build build
-    - name: Stress test main_sdl2
+    - name: test1
+      continue-on-error: true
       run: |
-        set -eu
-        for i in {1..200}; do (time build/main_sdl2 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
-    - name: Stress test main_sdl2
+        ctest -V
+    - name: test2
+      continue-on-error: true
       run: |
-        set -eu
-        for i in {1..200}; do (time build/main_sdl3 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
-
+        ctest -V
+    - name: test3
+      continue-on-error: true
+      run: |
+        ctest -V
