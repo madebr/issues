@@ -1,41 +1,43 @@
+#define SDL_MAIN_HANDLED
+#if defined(WITH_SDL2)
+#include <SDL2/SDL.h>
+#elif defined(WITH_SDL3)
 #include <SDL3/SDL.h>
+#else
+#pragma error "No SDL"
+#endif
+
+static void log_locales(void)
+{
+    SDL_Locale *locales = SDL_GetPreferredLocales();
+    if (locales == NULL) {
+        SDL_Log("Couldn't determine locales: %s", SDL_GetError());
+    } else {
+        SDL_Locale *l;
+        unsigned int total = 0;
+        SDL_Log("Locales, in order of preference:");
+        for (l = locales; l->language; l++) {
+            const char *c = l->country;
+            SDL_Log(" - %s%s%s", l->language, c ? "_" : "", c ? c : "");
+            total++;
+        }
+        SDL_Log("%u locales seen.", total);
+        SDL_free(locales);
+    }
+}
 
 int main(int argc, char *argv[]) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+#if defined(WITH_SDL2)
+    SDL_SetMainReady();
+#endif
+    SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO);
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         SDL_Log("SDL_Init failed (%s)", SDL_GetError());
         return 1;
     }
-
-    SDL_Window *window = NULL;
-    SDL_Renderer *renderer = NULL;
-
-    if (SDL_CreateWindowAndRenderer(640, 480, SDL_WINDOW_RESIZABLE, &window, &renderer) < 0) {
-        SDL_Log("SDL_CreateWindowAndRenderer failed (%s)", SDL_GetError());
-        SDL_Quit();
-        return 1;
-    }
-    SDL_SetWindowTitle(window, "SDL issue");
-
-    while (1) {
-        int finished = 0;
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_EVENT_QUIT) {
-                finished = 1;
-                break;
-            }
-        }
-        if (finished) {
-            break;
-        }
-
-        SDL_SetRenderDrawColor(renderer, 80, 80, 80, SDL_ALPHA_OPAQUE);
-        SDL_RenderClear(renderer);
-        SDL_RenderPresent(renderer);
-    }
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    log_locales();
 
     SDL_Quit();
+    return 0;
 }

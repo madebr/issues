@@ -18,14 +18,8 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-#        - { name: 'windows: mingw64',   os: 'windows-latest', shell: 'msys2 {0}',   msys2: true,  msystem: 'mingw64', msys-env: 'mingw-w64-x86_64' }
-#        - { name: 'windows: clang32', os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'clang32', msys-env: 'mingw-w64-clang-i686' }
-#        - { name: 'windows: ucrt64',  os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'ucrt64',  msys-env: 'mingw-w64-ucrt-x86_64 '}
-#        - { name: 'windows: MSVC',    os: windows-latest,     shell: 'pwsh',        msvc: true,   msvc_arch: x64 }
-#        - { name: 'linux: MinGW',     os: ubuntu-latest,      shell: 'bash',        cmake-toolchain-file: 'cmake/mingw64.cmake', apt-packages: 'mingw-w64'}
-        - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', docker: 'fedora:rawhide', prepare: 'sudo dnf install -y gcc g++ cmake'}
-        - { name: 'linux: default',   os: ubuntu-latest,      shell: 'bash', docker: 'ubuntu:23.04', prepare: 'apt-get update -y && apt-get install -y build-essential cmake'}
-#        - { name: 'macos: default',   os: macos-latest,       shell: 'sh', }
+        - { name: 'windows: mingw64',   os: 'windows-latest', shell: 'msys2 {0}',   msys2: true,  msystem: 'mingw64', msys-env: 'mingw-w64-x86_64' }
+        - { name: 'windows: clang32', os: windows-latest,     shell: 'msys2 {0}',   msys2: true,  msystem: 'clang32', msys-env: 'mingw-w64-clang-i686' }
     steps:
 #    - uses: ilammy/msvc-dev-cmd@v1
 #      if: ${{ matrix.platform.msvc }}
@@ -44,8 +38,16 @@ jobs:
     - run: |
         ${{ matrix.platform.prepare }}
     - uses: actions/checkout@v3
-    - name: Set up SDL
-      id: sdl
+    - name: Set up SDL2
+      id: sdl2
+      uses: madebr/setup-sdl@experimental
+      with:
+        version: 2-head
+        shell: ${{ matrix.platform.shell }}
+        cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
+        install-linux-dependencies: true
+    - name: Set up SDL3
+      id: sdl3
       uses: madebr/setup-sdl@experimental
       with:
         version: 3-head
@@ -58,4 +60,12 @@ jobs:
     - name: Build (CMake)
       run: |
         cmake --build build
+    - name: Stress test main_sdl2
+      run: |
+        set -eu
+        for i in {1..200}; do (time build/main_sdl2 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
+    - name: Stress test main_sdl2
+      run: |
+        set -eu
+        for i in {1..200}; do (time build/main_sdl3 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
 
