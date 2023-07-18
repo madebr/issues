@@ -5,7 +5,6 @@ enable_testing()
 
 #find_package(SDL2 CONFIG REQUIRED)
 find_package(SDL3 CONFIG REQUIRED)
-
 function(add_sdl_test_executable TARGET)
     cmake_parse_arguments(ARGS "" "" "SOURCES" ${ARGN})
 
@@ -19,11 +18,13 @@ function(add_sdl_test_executable TARGET)
     target_link_libraries(sdl3_${TARGET} PRIVATE SDL3::SDL3_test SDL3::SDL3)
     target_compile_definitions(sdl3_${TARGET} PRIVATE WITH_SDL3)
     add_test(sdl3_${TARGET} sdl3_${TARGET})
+    get_property(SDL3_DLL TARGET SDL3::SDL3-shared PROPERTY IMPORTED_LOCATION_DEBUG)
+    get_filename_component(SDL3_DIR "${SDL3_DLL}" DIRECTORY)
     set_tests_properties(sdl3_${TARGET} PROPERTIES
         TIMEOUT 20
-        ENVIRONMENT "SDL_AUDIODRIVER=dummy;SDL_VIDEODRIVER=dummy;SDL_AUDIO_DRIVER=dummy;SDL_VIDEO_DRIVER=dummy;SDL_TESTS_QUICK=1;PATH=${CMAKE_BINARY_DIR}"
+        ENVIRONMENT "SDL_AUDIODRIVER=dummy;SDL_VIDEODRIVER=dummy;SDL_AUDIO_DRIVER=dummy;SDL_VIDEO_DRIVER=dummy;SDL_TESTS_QUICK=1;PATH=${SDL3_DIR}"
     )
-    add_custom_command(TARGET sdl3_${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:sdl3_${TARGET}> $<TARGET_FILE_DIR:sdl3_${TARGET}> COMMAND_EXPAND_LISTS)
+#    add_custom_command(TARGET sdl3_${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:sdl3_${TARGET}> $<TARGET_FILE_DIR:sdl3_${TARGET}> COMMAND_EXPAND_LISTS)
 endfunction()
 
 add_sdl_test_executable(testsurround SOURCES testsurround.c)
