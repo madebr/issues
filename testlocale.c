@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     SDLTest_CommonState *state;
 
     /* Initialize test framework */
-    state = SDLTest_CommonCreateState(argv, 0);
+    state = SDLTest_CommonCreateState(argv, SDL_INIT_VIDEO);
     if (state == NULL) {
         return 1;
     }
