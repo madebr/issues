@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.22)
 project(issues C)
 
 enable_testing()
@@ -23,6 +23,7 @@ function(add_sdl_test_executable TARGET)
         TIMEOUT 20
         ENVIRONMENT "SDL_AUDIODRIVER=dummy;SDL_VIDEODRIVER=dummy;SDL_AUDIO_DRIVER=dummy;SDL_VIDEO_DRIVER=dummy;SDL_TESTS_QUICK=1"
     )
+    add_custom_command(TARGET sdl3_${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:sdl3_${TARGET}> $<TARGET_FILE_DIR:sdl3_${TARGET}> COMMAND_EXPAND_LISTS)
 endfunction()
 
 add_sdl_test_executable(testsurround SOURCES testsurround.c)
@@ -35,7 +36,6 @@ add_sdl_test_executable(testthread SOURCES testthread.c)
 add_sdl_test_executable(testkeys SOURCES testthread.c)
 add_sdl_test_executable(testlocale SOURCES testlocale.c)
 
-execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:SDL3::SDL3-shared> "${CMAKE_BINARY_DIR}")
 
 #add_executable(main_sdl3 main.c)
 #target_link_libraries(main_sdl3 PRIVATE SDL3::SDL3-shared)
