@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 #endif
     SDL_LogSetPriority(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO);
 
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
-        SDL_Log("SDL_Init failed (%s)", SDL_GetError());
+    if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0) {
+        SDL_Log("SDL_InitSubSystem failed (%s)", SDL_GetError());
         return 1;
     }
     log_locales();
