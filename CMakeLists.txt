@@ -18,7 +18,7 @@ function(add_sdl_test_executable TARGET)
     target_link_libraries(sdl3_${TARGET} PRIVATE SDL3::SDL3_test SDL3::SDL3)
     target_compile_definitions(sdl3_${TARGET} PRIVATE WITH_SDL3)
     add_test(sdl3_${TARGET} sdl3_${TARGET})
-    get_property(SDL3_DLL TARGET SDL3::SDL3-shared PROPERTY IMPORTED_LOCATION_DEBUG)
+    get_property(SDL3_DLL TARGET SDL3::SDL3-shared PROPERTY IMPORTED_LOCATION_RELEASE)
     get_filename_component(SDL3_DIR "${SDL3_DLL}" DIRECTORY)
     set_tests_properties(sdl3_${TARGET} PROPERTIES
         TIMEOUT 20

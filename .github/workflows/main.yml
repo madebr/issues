@@ -47,6 +47,7 @@ jobs:
       id: sdl3
       uses: madebr/setup-sdl@experimental
       with:
+        cmake-build-type: Release
         version: b1a0bc3fb0ad2198500cbddc2e8c73d8ec39de31
         shell: ${{ matrix.platform.shell }}
         cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
@@ -54,7 +55,7 @@ jobs:
         sdl-test: true
     - name: Configure (CMake)
       run: |
-        cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ matrix.platform.cmake-toolchain-file }}
+        cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ matrix.platform.cmake-toolchain-file }} -DCMAKE_BUID_TYPE=Release -GNinja
     - name: Build (CMake)
       run: |
         cmake --build build
