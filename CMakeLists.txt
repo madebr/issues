@@ -21,7 +21,7 @@ function(add_sdl_test_executable TARGET)
     add_test(sdl3_${TARGET} sdl3_${TARGET})
     set_tests_properties(sdl3_${TARGET} PROPERTIES
         TIMEOUT 20
-        ENVIRONMENT "SDL_AUDIODRIVER=dummy;SDL_VIDEODRIVER=dummy;SDL_AUDIO_DRIVER=dummy;SDL_VIDEO_DRIVER=dummy;SDL_TESTS_QUICK=1"
+        ENVIRONMENT "SDL_AUDIODRIVER=dummy;SDL_VIDEODRIVER=dummy;SDL_AUDIO_DRIVER=dummy;SDL_VIDEO_DRIVER=dummy;SDL_TESTS_QUICK=1;PATH=${CMAKE_BINARY_DIR}"
     )
     add_custom_command(TARGET sdl3_${TARGET} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:sdl3_${TARGET}> $<TARGET_FILE_DIR:sdl3_${TARGET}> COMMAND_EXPAND_LISTS)
 endfunction()
@@ -30,7 +30,7 @@ add_sdl_test_executable(testsurround SOURCES testsurround.c)
 add_sdl_test_executable(testaudioinfo SOURCES testaudioinfo.c)
 add_sdl_test_executable(testatomic SOURCES testatomic.c)
 add_sdl_test_executable(testerror SOURCES testerror.c)
-#add_sdl_test_executable(testevdev SOURCES testevdev.c)
+add_sdl_test_executable(testevdev SOURCES testevdev.c)
 add_sdl_test_executable(testfile SOURCES testfile.c)
 add_sdl_test_executable(testthread SOURCES testthread.c)
 add_sdl_test_executable(testkeys SOURCES testthread.c)
