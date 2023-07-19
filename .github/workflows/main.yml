@@ -53,6 +53,7 @@ jobs:
         cmake-toolchain-file: ${{ matrix.platform.cmake-toolchain-file }}
         install-linux-dependencies: true
         sdl-test: true
+        add-to-environment: true
     - name: Configure (CMake)
       run: |
         cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=${{ matrix.platform.cmake-toolchain-file }} -DCMAKE_BUID_TYPE=Release -GNinja
@@ -74,3 +75,18 @@ jobs:
       run: |
         cd build
         ctest -V
+    - name: repeated testlocale
+      continue-on-error: true
+      run: |
+        build/sdl3_testlocale
+        for i in {1..500}; do (time build/sdl3_testlocale 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
+    - name: repeated testkeys
+      continue-on-error: true
+      run: |
+        build/sdl3_testkeys
+        for i in {1..500}; do (time build/sdl3_testkeys 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
+    - name: repeated testkeys + testlocale
+      continue-on-error: true
+      run: |
+        sh -c "build/sdl3_testkeys; build/sdl3_testlocale"
+        for i in {1..500}; do (time sh -c "build/sdl3_testkeys;build/sdl3_testlocale" 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
