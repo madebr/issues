@@ -78,15 +78,21 @@ jobs:
     - name: repeated testlocale
       continue-on-error: true
       run: |
+        export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
+        echo "PATH=$PATH"
         build/sdl3_testlocale
         for i in {1..500}; do (time build/sdl3_testlocale 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
     - name: repeated testkeys
       continue-on-error: true
       run: |
+        export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
+        echo "PATH=$PATH"
         build/sdl3_testkeys
         for i in {1..500}; do (time build/sdl3_testkeys 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
     - name: repeated testkeys + testlocale
       continue-on-error: true
       run: |
+        export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
+        echo "PATH=$PATH"
         sh -c "build/sdl3_testkeys; build/sdl3_testlocale"
         for i in {1..500}; do (time sh -c "build/sdl3_testkeys;build/sdl3_testlocale" 2>/dev/null) 2>&1 | grep real | awk '{print $2}'; done
