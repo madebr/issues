@@ -33,6 +33,7 @@ jobs:
           ${{ matrix.platform.msys-env }}-cmake
           ${{ matrix.platform.msys-env }}-ninja
           ${{ matrix.platform.msys-env }}-pkg-config
+          ${{ matrix.platform.msys-env }}-python
     - uses: actions/checkout@v3
 #    - name: Set up SDL2
 #      id: sdl2
