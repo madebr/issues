@@ -34,7 +34,7 @@ add_sdl_test_executable(testerror SOURCES testerror.c)
 add_sdl_test_executable(testevdev SOURCES testevdev.c)
 add_sdl_test_executable(testfile SOURCES testfile.c)
 add_sdl_test_executable(testthread SOURCES testthread.c)
-add_sdl_test_executable(testkeys SOURCES testthread.c)
+add_sdl_test_executable(testkeys SOURCES testkeys.c)
 add_sdl_test_executable(testlocale SOURCES testlocale.c)
 
 
