@@ -63,16 +63,22 @@ jobs:
     - name: test1
       continue-on-error: true
       run: |
+        export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
+        echo "PATH=$PATH"
         cd build
         ctest -V
     - name: test2
       continue-on-error: true
       run: |
+        export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
+        echo "PATH=$PATH"
         cd build
         ctest -V
     - name: test3
       continue-on-error: true
       run: |
+        export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
+        echo "PATH=$PATH"
         cd build
         ctest -V
     - name: repeated testlocale
