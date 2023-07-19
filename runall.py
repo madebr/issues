@@ -16,7 +16,7 @@ def print_stats(reports, name):
     q1 = sdata[len(sdata)//4]
     median = sdata[len(data)//2]
     q3 = sdata[3 * len(data)//4]
-    print(f"{name:>16s}", f"min={mini:.03f}", f"max={maxi:.03f}", f"avg={avg:.03f}", f"q1|med|q3={q1:.03f}|{median:.03f}|{q3:.03f}")
+    print(f"{name:>18s}", f"min={mini:.03f}", f"max={maxi:.03f}", f"avg={avg:.03f}", f"q1|med|q3={q1:.03f}|{median:.03f}|{q3:.03f}")
 
 def main():
     parser = argparse.ArgumentParser(allow_abbrev=False)
@@ -52,6 +52,9 @@ def main():
             report[name] = end - start
         print(run_i, report)
         reports.append(report)
+
+
+    print(reports)
 
     for name in NAMES:
         print_stats(reports, name)

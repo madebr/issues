@@ -116,4 +116,4 @@ jobs:
         export SDL_VIDEO_DRIVER=dummy
         export PATH=$(cygpath "${{env.SDL3_ROOT}}/bin"):$PATH
         echo "PATH=$PATH"
-        python runall.py
+        python runall.py --count 500
