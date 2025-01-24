@@ -24,7 +24,7 @@ jobs:
       - name: Patch SDL3 CMake configuration file
         if: ${{ matrix.patch }}
         run: |
-          sed -i -E 's#IMPORTED_LOCATION "\$\{_sdl3_framework_path\}"#IMPORTED_LOCATION "${_sdl3_framework_path}/SDL3"#' /tmp/SDL3/share/cmake/SDL3/SDL3Config.cmake
+          sed -i '' -E 's#IMPORTED_LOCATION "\$\\{_sdl3_framework_path\\}"#IMPORTED_LOCATION "${_sdl3_framework_path}/SDL3"#' /tmp/SDL3/share/cmake/SDL3/SDL3Config.cmake
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
