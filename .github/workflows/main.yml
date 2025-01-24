@@ -33,11 +33,13 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: ${{ matrix.cmake-version }}
+      - name: 'Set up ninja'
+        uses: ./.github/actions/setup-ninja
       - name: Configure (CMake)
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_PREFIX_PATH=/tmp/SDL3 -DTEST_STATIC=OFF -DTEST_TEST=OFF -DTEST_FULL=OFF
+          cmake .. -DCMAKE_PREFIX_PATH=/tmp/SDL3 -DTEST_STATIC=OFF -DTEST_TEST=OFF -DTEST_FULL=OFF -GNinja
       - name: Build (CMake)
         run: |
-          cmake --build build --verbose
+          ninja -C build -v
