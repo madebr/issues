@@ -25,6 +25,9 @@ jobs:
         if: ${{ matrix.patch }}
         run: |
           sed -i '' -E 's#IMPORTED_LOCATION "\$\\{_sdl3_framework_path\\}"#IMPORTED_LOCATION "${_sdl3_framework_path}/SDL3"#' /tmp/SDL3/share/cmake/SDL3/SDL3Config.cmake
+      - name: cat SDL3Config.cmake
+        run: |
+          cat /tmp/SDL3/share/cmake/SDL3/SDL3Config.cmake
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
@@ -33,7 +36,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DCMAKE_PREFIX_PATH=/tmp/SDL3 -DTEST_STATIC=OFF -DTEST_TEST=OFF -DTEST_FULL=OFF
+          cmake .. -DCMAKE_PREFIX_PATH=/tmp/SDL3 -DTEST_STATIC=OFF -DTEST_TEST=OFF -DTEST_FULL=OFF --verbose
       - name: Build (CMake)
         run: |
           cmake --build build
