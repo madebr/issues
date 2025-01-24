@@ -43,3 +43,6 @@ jobs:
       - name: Build (CMake)
         run: |
           ninja -C build -v
+      - name: Run cli-shared
+        run: |
+          build/cli-shared
