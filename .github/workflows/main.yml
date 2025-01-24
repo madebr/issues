@@ -24,7 +24,7 @@ jobs:
           cmake-version: ${{ matrix.cmake-version }}
       - name: Configure (CMake)
         run: |
-          cmake -B build -DCMAKE_PREFIX_PATH=/Volumes/SDL3 -DTEST_STATIC=OFF -DTEST_TEST=OFF -DTEST_FULL=OFF
+          cmake . -B build -DCMAKE_PREFIX_PATH=/Volumes/SDL3 -DTEST_STATIC=OFF -DTEST_TEST=OFF -DTEST_FULL=OFF
       - name: Build (CMake)
         run: |
           cmake --build build
