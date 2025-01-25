@@ -1,0 +1,19 @@
+name: 'Build'
+
+on: [push, pull_request]
+
+jobs:
+  xxx:
+    name: 'xxx'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: open-watcom/setup-watcom
+        with:
+          target: win
+      - name: Configure (CMake)
+        run: |
+          cmake -S . -B build -G "Watcom WMake"
+      - name: Build (CMake)
+        run: |
+          cmake --build build --verbose
