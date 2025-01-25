@@ -8,7 +8,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
       - uses: actions/checkout@v4
-      - uses: open-watcom/setup-watcom
+      - uses: open-watcom/setup-watcom@v0
         with:
           target: win
       - name: Configure (CMake)
